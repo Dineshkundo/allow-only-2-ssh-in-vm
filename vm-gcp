@@ -1,0 +1,7 @@
+gcloud compute instances add-metadata instance-20250425-061740 \
+  --metadata enable-oslogin=TRUE,startup-script='#!/bin/bash
+  sed -i "s/^#MaxSessions.*/MaxSessions 2/" /etc/ssh/sshd_config
+  sed -i "s/^#MaxStartups.*/MaxStartups 2:30:10/" /etc/ssh/sshd_config
+  echo "MaxSessions 2" >> /etc/ssh/sshd_config
+  echo "MaxStartups 2:30:10" >> /etc/ssh/sshd_config
+  systemctl restart sshd'
